@@ -1,6 +1,7 @@
 // logic class layer that is the top level of all API application functions
 import express = require("express");
 import {Environment} from "./environment";
+import {router} from "../routes/api";
 import {connect} from "mongoose";
 /**
  * Top level class of API logic
@@ -12,6 +13,7 @@ export class Application {
     this._expressServer = express();
     this._environment = environment;
     this.configServer();
+    this.addMiddleware();
     this.startServer();
   }
 
@@ -21,6 +23,10 @@ export class Application {
         () => {console.log("Database Connected");},
         err => {console.log(err);}
       );
+  }
+
+  addMiddleware(): void {
+    this._expressServer.use("/api", router);
   }
 
   startServer():void {
