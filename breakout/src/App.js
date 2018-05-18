@@ -1,19 +1,26 @@
+// @flow
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Game} from "./components/game"
+import { type DisplayType, getDisplayDefaults } from './reducers/display-reducers';
 
-class App extends Component {
+// overkill for this project but provide to show ability and convenience if ever scaled-up 
+const ApplicationState = React.createContext();
+
+export type State = {
+  display: DisplayType
+}
+
+class App extends Component<null, State> {
+  state = {
+    display: getDisplayDefaults(this),
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <ApplicationState.Provider value={this.state}>
+        <div>
+          <Game />
+        </div>
+      </ApplicationState.Provider>
     );
   }
 }
