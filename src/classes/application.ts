@@ -1,5 +1,6 @@
 // logic class layer that is the top level of all API application functions
 import express = require("express");
+import bodyParser from "body-parser";
 import {Environment} from "./environment";
 import {router} from "../routes/api";
 import {connect} from "mongoose";
@@ -26,6 +27,7 @@ export class Application {
   }
 
   addMiddleware(): void {
+    this._expressServer.use(bodyParser.urlencoded({extended: true}));
     this._expressServer.use("/api", router);
   }
 
