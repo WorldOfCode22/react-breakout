@@ -4,7 +4,8 @@
   "description": "A simple full stack breakout game",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "api": "cd build && node index.js"
   },
   "repository": {
     "type": "git",
