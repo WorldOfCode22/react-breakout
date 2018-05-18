@@ -5,8 +5,13 @@ import express = require("express");
  */
 const scoreRouter: express.Router = express.Router();
 
-scoreRouter.get("/", (req, res) => {
-  res.send("TEST");
+scoreRouter.post("/", (req, res) => {
+  const {user, score} = req.query;
+  if(user && score) {
+    res.status(200).end();
+  } else {
+    res.status(400).json({error: "Missing required value"});
+  }
 });
 
 export {scoreRouter};
